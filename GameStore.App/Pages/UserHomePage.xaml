@@ -1,0 +1,66 @@
+<Page
+    x:Class="GameStore.App.Pages.UserHomePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- הדף הראשי של משתמש מחובר -->
+    <Grid Style="{StaticResource PageGridStyle}">
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel MaxWidth="1000">
+                <TextBlock x:Name="WelcomeText" Style="{StaticResource PageTitleStyle}" />
+                <TextBlock Text="זה הדף האישי שלך. מה בא לך לשחק היום?" Style="{StaticResource PageSubtitleStyle}" />
+
+                <!-- סטטיסטיקה אישית -->
+                <Grid ColumnSpacing="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Border Grid.Column="0" Style="{StaticResource CardStyle}">
+                        <StackPanel>
+                            <TextBlock Text="משחקים בספרייה" Foreground="{StaticResource SubtleTextBrush}" />
+                            <TextBlock x:Name="OwnedCountText" Text="0" FontSize="36" FontWeight="Bold" />
+                        </StackPanel>
+                    </Border>
+                    <Border Grid.Column="1" Style="{StaticResource CardStyle}">
+                        <StackPanel>
+                            <TextBlock Text="סה&quot;כ רכישות" Foreground="{StaticResource SubtleTextBrush}" />
+                            <TextBlock x:Name="SpentText" Text="₪0" FontSize="36" FontWeight="Bold" Foreground="{StaticResource PriceBrush}" />
+                        </StackPanel>
+                    </Border>
+                    <Border Grid.Column="2" Style="{StaticResource CardStyle}">
+                        <StackPanel>
+                            <TextBlock Text="חבר מאז" Foreground="{StaticResource SubtleTextBrush}" />
+                            <TextBlock x:Name="JoinText" FontSize="36" FontWeight="Bold" />
+                        </StackPanel>
+                    </Border>
+                </Grid>
+
+                <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                    <Button Content="לקטלוג המשחקים" Click="CatalogButton_Click" Style="{StaticResource PrimaryButtonStyle}" />
+                    <Button Content="המשחקים שלי" Click="MyGamesButton_Click" Style="{StaticResource SecondaryButtonStyle}" />
+                    <Button Content="עריכת פרופיל" Click="ProfileButton_Click" Style="{StaticResource SecondaryButtonStyle}" />
+                </StackPanel>
+
+                <TextBlock Text="🆕 חדש בחנות" Style="{StaticResource SectionTitleStyle}" Margin="0,28,0,8" />
+                <GridView x:Name="NewGamesGrid" SelectionMode="None" IsItemClickEnabled="True" ItemClick="NewGamesGrid_ItemClick">
+                    <GridView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Width="250" Background="{StaticResource CardBrush}" BorderBrush="{StaticResource CardBorderBrush}"
+                                    BorderThickness="1" CornerRadius="10">
+                                <StackPanel>
+                                    <Image Source="{Binding ImageUrl, Converter={StaticResource ImageUrlConverter}}" Height="120" Stretch="UniformToFill" />
+                                    <StackPanel Padding="14,10,14,14">
+                                        <TextBlock Text="{Binding Title}" FontSize="16" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" />
+                                        <TextBlock Text="{Binding Price, Converter={StaticResource PriceConverter}}" Style="{StaticResource PriceTextStyle}" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
+                </GridView>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

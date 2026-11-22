@@ -1,0 +1,34 @@
+<Page
+    x:Class="GameStore.App.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    FlowDirection="RightToLeft"
+    Background="{StaticResource PageBackgroundBrush}">
+
+    <!--
+        MainPage היא ה"מעטפת" של כל האפליקציה:
+        - NavigationView = תפריט צד. הפריטים בו משתנים לפי מי שמחובר (אורח / משתמש / מנהל)
+        - Frame (ContentFrame) = האזור שבו מוצג הדף הנוכחי
+        כל שאר הדפים נטענים לתוך ה-Frame, ולכן לכולם יש אותו תפריט ואותו עיצוב.
+        FlowDirection="RightToLeft" = כל האפליקציה מימין לשמאל (עברית).
+    -->
+    <NavigationView
+        x:Name="NavView"
+        PaneTitle="🎮 GameZone"
+        PaneDisplayMode="Left"
+        OpenPaneLength="250"
+        IsSettingsVisible="False"
+        IsBackButtonVisible="Visible"
+        ItemInvoked="NavView_ItemInvoked"
+        BackRequested="NavView_BackRequested">
+
+        <NavigationView.PaneFooter>
+            <TextBlock x:Name="UserInfoText"
+                       Margin="16,8,16,16"
+                       Foreground="{StaticResource SubtleTextBrush}"
+                       TextWrapping="Wrap" />
+        </NavigationView.PaneFooter>
+
+        <Frame x:Name="ContentFrame" Navigated="ContentFrame_Navigated" />
+    </NavigationView>
+</Page>

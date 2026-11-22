@@ -1,0 +1,86 @@
+<Page
+    x:Class="GameStore.App.Pages.AddGamePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- הוספת משחק חדש / עריכת משחק קיים (מנהל בלבד) -->
+    <Grid Style="{StaticResource PageGridStyle}">
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <Grid MaxWidth="1000" ColumnSpacing="24">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="340" />
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Column="0" Style="{StaticResource CardStyle}" Padding="28">
+                    <StackPanel>
+                        <TextBlock x:Name="TitleText" Text="הוספת משחק חדש" Style="{StaticResource PageTitleStyle}" />
+                        <TextBlock Text="כל השדות חובה, חוץ מכתובת התמונה" Style="{StaticResource PageSubtitleStyle}" />
+
+                        <TextBox x:Name="GameTitleBox" Header="שם המשחק" Style="{StaticResource FormTextBoxStyle}" MaxLength="100" />
+                        <TextBlock x:Name="GameTitleError" Style="{StaticResource ErrorTextStyle}" />
+
+                        <TextBox x:Name="DeveloperBox" Header="חברת פיתוח" Style="{StaticResource FormTextBoxStyle}" MaxLength="100" />
+                        <TextBlock x:Name="DeveloperError" Style="{StaticResource ErrorTextStyle}" />
+
+                        <TextBox x:Name="DescriptionBox" Header="תיאור" Style="{StaticResource FormTextBoxStyle}"
+                                 AcceptsReturn="True" TextWrapping="Wrap" Height="110" MaxLength="1000" />
+                        <TextBlock x:Name="DescriptionError" Style="{StaticResource ErrorTextStyle}" />
+
+                        <Grid ColumnSpacing="12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0">
+                                <TextBox x:Name="PriceBox" Header="מחיר (₪)" PlaceholderText="89.90" InputScope="Number" Style="{StaticResource FormTextBoxStyle}" />
+                                <TextBlock x:Name="PriceError" Style="{StaticResource ErrorTextStyle}" />
+                            </StackPanel>
+                            <StackPanel Grid.Column="1">
+                                <TextBox x:Name="YearBox" Header="שנת יציאה" PlaceholderText="2025" InputScope="Number" Style="{StaticResource FormTextBoxStyle}" />
+                                <TextBlock x:Name="YearError" Style="{StaticResource ErrorTextStyle}" />
+                            </StackPanel>
+                            <StackPanel Grid.Column="2">
+                                <ComboBox x:Name="AgeCombo" Header="גיל מומלץ" PlaceholderText="בחר..." Style="{StaticResource FormComboBoxStyle}" />
+                                <TextBlock x:Name="AgeError" Style="{StaticResource ErrorTextStyle}" />
+                            </StackPanel>
+                        </Grid>
+
+                        <ComboBox x:Name="GenreCombo" Header="ז'אנר" PlaceholderText="בחר ז'אנר..." DisplayMemberPath="Name" Style="{StaticResource FormComboBoxStyle}" />
+                        <TextBlock x:Name="GenreError" Style="{StaticResource ErrorTextStyle}" />
+
+                        <TextBox x:Name="ImageUrlBox" Header="כתובת תמונה (לא חובה)" PlaceholderText="https://..." FlowDirection="LeftToRight"
+                                 Style="{StaticResource FormTextBoxStyle}" LostFocus="ImageUrlBox_LostFocus" />
+                        <TextBlock x:Name="ImageUrlError" Style="{StaticResource ErrorTextStyle}" />
+
+                        <StackPanel Orientation="Horizontal" Margin="0,28,0,0">
+                            <Button x:Name="SaveButton" Content="שמירה" Click="SaveButton_Click" Style="{StaticResource PrimaryButtonStyle}" />
+                            <Button Content="ניקוי" Click="ClearButton_Click" Style="{StaticResource SecondaryButtonStyle}" />
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <StackPanel Grid.Column="1">
+                    <!-- תצוגה מקדימה של התמונה -->
+                    <Border Style="{StaticResource CardStyle}">
+                        <StackPanel>
+                            <TextBlock Text="תצוגה מקדימה" Style="{StaticResource SectionTitleStyle}" Margin="0,0,0,8" />
+                            <Image x:Name="PreviewImage" Height="170" Stretch="UniformToFill" />
+                        </StackPanel>
+                    </Border>
+
+                    <!-- הוספת ז'אנר חדש בלי לצאת מהדף -->
+                    <Border Style="{StaticResource CardStyle}" Margin="0,16,0,0">
+                        <StackPanel>
+                            <TextBlock Text="הוספת ז'אנר חדש" Style="{StaticResource SectionTitleStyle}" Margin="0,0,0,8" />
+                            <TextBox x:Name="NewGenreBox" PlaceholderText="שם הז'אנר" MaxLength="50" />
+                            <TextBlock x:Name="NewGenreError" Style="{StaticResource ErrorTextStyle}" />
+                            <Button Content="➕ הוסף ז'אנר" Click="AddGenreButton_Click" Style="{StaticResource SecondaryButtonStyle}" Margin="0,8,0,0" />
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</Page>

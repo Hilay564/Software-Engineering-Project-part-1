@@ -1,0 +1,26 @@
+<Page
+    x:Class="GameStore.App.Pages.EditProfilePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:GameStore.App.Controls">
+
+    <!-- שינוי פרטים על ידי המשתמש עצמו (עם בדיקות קלט) -->
+    <Grid Style="{StaticResource PageGridStyle}">
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <Border Style="{StaticResource CardStyle}" MaxWidth="620" HorizontalAlignment="Center" Padding="32">
+                <StackPanel>
+                    <TextBlock Text="עריכת פרופיל" Style="{StaticResource PageTitleStyle}" />
+                    <TextBlock Text="עדכן את הפרטים שלך ולחץ על שמירה. את שם המשתמש אי אפשר לשנות." Style="{StaticResource PageSubtitleStyle}" />
+
+                    <controls:UserForm x:Name="Form" />
+
+                    <StackPanel Orientation="Horizontal" Margin="0,28,0,0">
+                        <Button x:Name="SaveButton" Content="שמירת שינויים" Click="SaveButton_Click" Style="{StaticResource PrimaryButtonStyle}" />
+                        <Button Content="ביטול" Click="CancelButton_Click" Style="{StaticResource SecondaryButtonStyle}" />
+                        <ProgressRing x:Name="Loading" Width="24" Height="24" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </ScrollViewer>
+    </Grid>
+</Page>

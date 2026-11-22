@@ -1,0 +1,64 @@
+<Page
+    x:Class="GameStore.App.Pages.GameDetailsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--
+        דף פרטי משחק. ה-DataContext של הדף הוא אובייקט ה-Game,
+        ולכן {Binding Title} מציג את שם המשחק וכו'.
+    -->
+    <Grid Style="{StaticResource PageGridStyle}">
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <Grid MaxWidth="1000" ColumnSpacing="32">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="420" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Column="0" CornerRadius="12" VerticalAlignment="Top" BorderBrush="{StaticResource CardBorderBrush}" BorderThickness="1">
+                    <Image Source="{Binding ImageUrl, Converter={StaticResource ImageUrlConverter}}" Stretch="UniformToFill" Height="240" />
+                </Border>
+
+                <StackPanel Grid.Column="1">
+                    <TextBlock Text="{Binding Title}" Style="{StaticResource PageTitleStyle}" />
+                    <TextBlock Style="{StaticResource PageSubtitleStyle}">
+                        <Run Text="{Binding GenreName}" /><Run Text="  •  " /><Run Text="{Binding Developer}" /><Run Text="  •  " /><Run Text="{Binding ReleaseYear}" />
+                    </TextBlock>
+
+                    <Border Style="{StaticResource CardStyle}" Margin="0,0,0,16">
+                        <StackPanel>
+                            <TextBlock Text="תיאור" Style="{StaticResource SectionTitleStyle}" Margin="0,0,0,8" />
+                            <TextBlock Text="{Binding Description}" Style="{StaticResource BodyTextStyle}" />
+                            <TextBlock Margin="0,12,0,0" Foreground="{StaticResource SubtleTextBrush}">
+                                <Run Text="גיל מומלץ: " /><Run Text="{Binding MinAge}" /><Run Text="+" />
+                            </TextBlock>
+                        </StackPanel>
+                    </Border>
+
+                    <TextBlock Text="{Binding Price, Converter={StaticResource PriceConverter}}" Style="{StaticResource PriceTextStyle}" FontSize="28" />
+
+                    <!-- אזור רכישה: מה שמוצג תלוי במצב המשתמש (הקוד מחליט) -->
+                    <StackPanel Orientation="Horizontal" Margin="0,16,0,0">
+                        <Button x:Name="BuyButton" Content="🛒 רכישה" Click="BuyButton_Click" Style="{StaticResource PrimaryButtonStyle}" Visibility="Collapsed" />
+                        <TextBlock x:Name="OwnedText" Text="✔ המשחק כבר בספרייה שלך" Foreground="{StaticResource SuccessBrush}"
+                                   FontSize="16" VerticalAlignment="Center" Visibility="Collapsed" />
+                        <Button x:Name="LoginToBuyButton" Content="התחבר כדי לרכוש" Click="LoginToBuyButton_Click"
+                                Style="{StaticResource SecondaryButtonStyle}" Visibility="Collapsed" />
+                    </StackPanel>
+
+                    <!-- כלים למנהל בלבד -->
+                    <Border x:Name="AdminPanel" Style="{StaticResource CardStyle}" Margin="0,24,0,0" Visibility="Collapsed">
+                        <StackPanel>
+                            <TextBlock Text="ניהול (מנהל בלבד)" Style="{StaticResource SectionTitleStyle}" Margin="0,0,0,8" />
+                            <StackPanel Orientation="Horizontal">
+                                <Button Content="✏ עריכת משחק" Click="EditButton_Click" Style="{StaticResource SecondaryButtonStyle}" />
+                                <Button Content="🗑 מחיקת משחק" Click="DeleteButton_Click" Style="{StaticResource SecondaryButtonStyle}"
+                                        Foreground="{StaticResource ErrorBrush}" />
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</Page>

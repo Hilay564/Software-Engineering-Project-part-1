@@ -1,0 +1,51 @@
+<Page
+    x:Class="GameStore.App.Pages.GamesPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- קטלוג המשחקים: חיפוש + סינון לפי ז'אנר + כרטיס לכל משחק -->
+    <Grid Style="{StaticResource PageGridStyle}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0">
+            <TextBlock Text="קטלוג משחקים" Style="{StaticResource PageTitleStyle}" />
+            <TextBlock Text="לחץ על משחק כדי לראות פרטים ולרכוש" Style="{StaticResource PageSubtitleStyle}" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,16">
+            <TextBox x:Name="SearchBox" PlaceholderText="🔍 חיפוש לפי שם משחק או מפתח..." Width="300" TextChanged="SearchBox_TextChanged" />
+            <ComboBox x:Name="GenreCombo" Width="200" Margin="12,0,0,0" DisplayMemberPath="Name" SelectionChanged="GenreCombo_SelectionChanged" />
+            <TextBlock x:Name="CountText" VerticalAlignment="Center" Margin="16,0,0,0" Foreground="{StaticResource SubtleTextBrush}" />
+            <ProgressRing x:Name="Loading" Width="24" Height="24" Margin="12,0,0,0" />
+        </StackPanel>
+
+        <!--
+            GridView מציג רשימה של פריטים כרשת של כרטיסים.
+            ItemTemplate = איך נראה כל כרטיס. {Binding Title} לוקח את Title מאובייקט ה-Game.
+        -->
+        <GridView x:Name="GamesGrid" Grid.Row="2" SelectionMode="None" IsItemClickEnabled="True" ItemClick="GamesGrid_ItemClick">
+            <GridView.ItemTemplate>
+                <DataTemplate>
+                    <Border Width="250" Background="{StaticResource CardBrush}" BorderBrush="{StaticResource CardBorderBrush}"
+                            BorderThickness="1" CornerRadius="10">
+                        <StackPanel>
+                            <Image Source="{Binding ImageUrl, Converter={StaticResource ImageUrlConverter}}" Height="140" Stretch="UniformToFill" />
+                            <StackPanel Padding="14,10,14,14">
+                                <TextBlock Text="{Binding Title}" FontSize="17" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" />
+                                <TextBlock Text="{Binding GenreName}" Foreground="{StaticResource SubtleTextBrush}" Margin="0,2,0,8" />
+                                <TextBlock Text="{Binding Price, Converter={StaticResource PriceConverter}}" Style="{StaticResource PriceTextStyle}" />
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+        </GridView>
+
+        <TextBlock x:Name="EmptyText" Grid.Row="2" Text="לא נמצאו משחקים מתאימים" Visibility="Collapsed"
+                   HorizontalAlignment="Center" Margin="0,40,0,0" Style="{StaticResource BodyTextStyle}" />
+    </Grid>
+</Page>

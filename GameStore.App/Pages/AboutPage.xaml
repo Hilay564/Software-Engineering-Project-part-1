@@ -1,0 +1,56 @@
+<Page
+    x:Class="GameStore.App.Pages.AboutPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- דף תוכן: הסבר מפורט על האפליקציה -->
+    <Grid Style="{StaticResource PageGridStyle}">
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel MaxWidth="900">
+                <TextBlock Text="אודות GameZone" Style="{StaticResource PageTitleStyle}" />
+                <TextBlock Text="מה האפליקציה עושה, למי היא מיועדת ואיך משתמשים בה" Style="{StaticResource PageSubtitleStyle}" />
+
+                <Border Style="{StaticResource CardStyle}" Margin="0,0,0,16">
+                    <StackPanel>
+                        <TextBlock Text="מטרת האפליקציה" Style="{StaticResource SectionTitleStyle}" Margin="0,0,0,8" />
+                        <TextBlock Style="{StaticResource BodyTextStyle}"
+                                   Text="GameZone היא חנות דיגיטלית למשחקי מחשב. המשתמשים יכולים לעיין בקטלוג, לקרוא פרטים על כל משחק (מפתח, שנת יציאה, ז'אנר, גיל מומלץ ומחיר) ולרכוש משחקים. המנהל מנהל את הקטלוג ואת המשתמשים." />
+                    </StackPanel>
+                </Border>
+
+                <Border Style="{StaticResource CardStyle}" Margin="0,0,0,16">
+                    <StackPanel>
+                        <TextBlock Text="סוגי משתמשים" Style="{StaticResource SectionTitleStyle}" Margin="0,0,0,8" />
+                        <TextBlock Style="{StaticResource BodyTextStyle}">
+                            <Run FontWeight="Bold">אורח: </Run><Run>יכול לצפות בקטלוג המשחקים ובפרטי כל משחק, ולהירשם או להתחבר.</Run>
+                            <LineBreak /><LineBreak />
+                            <Run FontWeight="Bold">משתמש רשום: </Run><Run>יכול לרכוש משחקים, לראות את ספריית המשחקים שלו ולעדכן את הפרטים האישיים שלו.</Run>
+                            <LineBreak /><LineBreak />
+                            <Run FontWeight="Bold">מנהל: </Run><Run>יכול להוסיף, לערוך ולמחוק משחקים, להוסיף ז'אנרים, לנהל את פרטי המשתמשים, למנות מנהלים נוספים ולצפות בסטטיסטיקות מכירה.</Run>
+                        </TextBlock>
+                    </StackPanel>
+                </Border>
+
+                <Border Style="{StaticResource CardStyle}" Margin="0,0,0,16">
+                    <StackPanel>
+                        <TextBlock Text="איך מתחילים?" Style="{StaticResource SectionTitleStyle}" Margin="0,0,0,8" />
+                        <TextBlock Style="{StaticResource BodyTextStyle}">
+                            <Run>1. לוחצים על 'הרשמה' בתפריט וממלאים את הטופס.</Run><LineBreak />
+                            <Run>2. אחרי ההרשמה נכנסים אוטומטית לדף האישי.</Run><LineBreak />
+                            <Run>3. בוחרים 'קטלוג משחקים', לוחצים על משחק ואז על 'רכישה'.</Run><LineBreak />
+                            <Run>4. המשחק מופיע מעכשיו תחת 'המשחקים שלי'.</Run>
+                        </TextBlock>
+                    </StackPanel>
+                </Border>
+
+                <Border Style="{StaticResource CardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="טכנולוגיות" Style="{StaticResource SectionTitleStyle}" Margin="0,0,0,8" />
+                        <TextBlock Style="{StaticResource BodyTextStyle}"
+                                   Text="ממשק משתמש: Universal Windows Platform (UWP) ו-XAML • שירות רשת: WCF • מסד נתונים: SQL Server • שפת תכנות: C#" />
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

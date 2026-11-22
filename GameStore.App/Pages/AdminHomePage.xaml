@@ -1,0 +1,76 @@
+<Page
+    x:Class="GameStore.App.Pages.AdminHomePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- הדף הראשי של המנהל: סטטיסטיקות, קיצורי דרך ורכישות אחרונות -->
+    <Grid Style="{StaticResource PageGridStyle}">
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel MaxWidth="1000">
+                <TextBlock x:Name="WelcomeText" Style="{StaticResource PageTitleStyle}" />
+                <TextBlock Text="לוח הבקרה של מנהל החנות" Style="{StaticResource PageSubtitleStyle}" />
+
+                <Grid ColumnSpacing="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Border Grid.Column="0" Style="{StaticResource CardStyle}">
+                        <StackPanel>
+                            <TextBlock Text="👥 משתמשים" Foreground="{StaticResource SubtleTextBrush}" />
+                            <TextBlock x:Name="UsersCountText" Text="-" FontSize="34" FontWeight="Bold" />
+                        </StackPanel>
+                    </Border>
+                    <Border Grid.Column="1" Style="{StaticResource CardStyle}">
+                        <StackPanel>
+                            <TextBlock Text="🎮 משחקים" Foreground="{StaticResource SubtleTextBrush}" />
+                            <TextBlock x:Name="GamesCountText" Text="-" FontSize="34" FontWeight="Bold" />
+                        </StackPanel>
+                    </Border>
+                    <Border Grid.Column="2" Style="{StaticResource CardStyle}">
+                        <StackPanel>
+                            <TextBlock Text="🛒 רכישות" Foreground="{StaticResource SubtleTextBrush}" />
+                            <TextBlock x:Name="PurchasesCountText" Text="-" FontSize="34" FontWeight="Bold" />
+                        </StackPanel>
+                    </Border>
+                    <Border Grid.Column="3" Style="{StaticResource CardStyle}">
+                        <StackPanel>
+                            <TextBlock Text="💰 הכנסות" Foreground="{StaticResource SubtleTextBrush}" />
+                            <TextBlock x:Name="RevenueText" Text="-" FontSize="34" FontWeight="Bold" Foreground="{StaticResource PriceBrush}" />
+                        </StackPanel>
+                    </Border>
+                </Grid>
+
+                <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                    <Button Content="➕ הוספת משחק" Click="AddGameButton_Click" Style="{StaticResource PrimaryButtonStyle}" />
+                    <Button Content="ניהול משתמשים" Click="UsersButton_Click" Style="{StaticResource SecondaryButtonStyle}" />
+                    <Button Content="קטלוג (עריכה ומחיקה)" Click="CatalogButton_Click" Style="{StaticResource SecondaryButtonStyle}" />
+                </StackPanel>
+
+                <TextBlock Text="רכישות אחרונות" Style="{StaticResource SectionTitleStyle}" Margin="0,28,0,8" />
+                <Border Style="{StaticResource CardStyle}" Padding="8">
+                    <ListView x:Name="RecentList" SelectionMode="None">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Padding="4,8" ColumnSpacing="12">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="140" />
+                                        <ColumnDefinition Width="110" />
+                                        <ColumnDefinition Width="90" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="{Binding GameTitle}" FontWeight="SemiBold" />
+                                    <TextBlock Grid.Column="1" Text="{Binding Username}" Foreground="{StaticResource SubtleTextBrush}" />
+                                    <TextBlock Grid.Column="2" Text="{Binding PurchaseDate, Converter={StaticResource DateConverter}}" Foreground="{StaticResource SubtleTextBrush}" />
+                                    <TextBlock Grid.Column="3" Text="{Binding PricePaid, Converter={StaticResource PriceConverter}}" Foreground="{StaticResource PriceBrush}" />
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- ספריית מחלקות (Class Library) שמכילה רק את הישויות של הפרויקט -->
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <RootNamespace>GameStore.Model</RootNamespace>
+    <AssemblyName>GameStore.Model</AssemblyName>
+    <LangVersion>7.3</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- נדרש בשביל [DataContract] / [DataMember] - כדי ש-WCF ידע לשלוח את האובייקטים ברשת -->
+    <Reference Include="System.Runtime.Serialization" />
+  </ItemGroup>
+
+</Project>

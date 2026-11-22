@@ -1,0 +1,125 @@
+<Application
+    x:Class="GameStore.App.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:helpers="using:GameStore.App.Helpers"
+    RequestedTheme="Dark">
+
+    <!--
+        כל העיצוב המשותף של האפליקציה נמצא כאן, ב-Application.Resources.
+        כל דף משתמש באותם סגנונות (Style="{StaticResource ...}"),
+        וכך כל הדפים נראים אחידים (זו אחת הדרישות של הפרויקט).
+        כדי לשנות צבע בכל האפליקציה, מספיק לשנות אותו כאן פעם אחת.
+    -->
+    <Application.Resources>
+        <ResourceDictionary>
+
+            <!-- ===== צבעים ===== -->
+            <SolidColorBrush x:Key="AccentBrush" Color="#7C3AED" />
+            <SolidColorBrush x:Key="AccentLightBrush" Color="#A78BFA" />
+            <SolidColorBrush x:Key="PageBackgroundBrush" Color="#120E1F" />
+            <SolidColorBrush x:Key="CardBrush" Color="#1E1833" />
+            <SolidColorBrush x:Key="CardBorderBrush" Color="#2E2650" />
+            <SolidColorBrush x:Key="SubtleTextBrush" Color="#B4AECB" />
+            <SolidColorBrush x:Key="ErrorBrush" Color="#F87171" />
+            <SolidColorBrush x:Key="SuccessBrush" Color="#4ADE80" />
+            <SolidColorBrush x:Key="PriceBrush" Color="#FACC15" />
+
+            <!-- ===== ממירים (Converters) לשימוש ב-Binding ===== -->
+            <helpers:PriceConverter x:Key="PriceConverter" />
+            <helpers:ImageUrlConverter x:Key="ImageUrlConverter" />
+            <helpers:DateConverter x:Key="DateConverter" />
+            <helpers:BoolToTextConverter x:Key="AdminTextConverter" />
+
+            <!-- ===== מבנה דף: כל דף מתחיל ב-Grid עם הסגנון הזה ===== -->
+            <Style x:Key="PageGridStyle" TargetType="Grid">
+                <Setter Property="Padding" Value="32,24,32,24" />
+                <Setter Property="Background" Value="{StaticResource PageBackgroundBrush}" />
+            </Style>
+
+            <!-- ===== טקסטים ===== -->
+            <Style x:Key="PageTitleStyle" TargetType="TextBlock">
+                <Setter Property="FontSize" Value="32" />
+                <Setter Property="FontWeight" Value="SemiBold" />
+                <Setter Property="Foreground" Value="White" />
+                <Setter Property="Margin" Value="0,0,0,4" />
+                <Setter Property="TextWrapping" Value="Wrap" />
+            </Style>
+
+            <Style x:Key="PageSubtitleStyle" TargetType="TextBlock">
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="Foreground" Value="{StaticResource SubtleTextBrush}" />
+                <Setter Property="Margin" Value="0,0,0,20" />
+                <Setter Property="TextWrapping" Value="Wrap" />
+            </Style>
+
+            <Style x:Key="SectionTitleStyle" TargetType="TextBlock">
+                <Setter Property="FontSize" Value="20" />
+                <Setter Property="FontWeight" Value="SemiBold" />
+                <Setter Property="Foreground" Value="{StaticResource AccentLightBrush}" />
+                <Setter Property="Margin" Value="0,16,0,8" />
+            </Style>
+
+            <Style x:Key="BodyTextStyle" TargetType="TextBlock">
+                <Setter Property="FontSize" Value="15" />
+                <Setter Property="Foreground" Value="White" />
+                <Setter Property="TextWrapping" Value="Wrap" />
+                <Setter Property="LineHeight" Value="24" />
+            </Style>
+
+            <!-- הודעת שגיאה מתחת לשדה בטופס. מוסתרת עד שיש שגיאה -->
+            <Style x:Key="ErrorTextStyle" TargetType="TextBlock">
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="Foreground" Value="{StaticResource ErrorBrush}" />
+                <Setter Property="TextWrapping" Value="Wrap" />
+                <Setter Property="Margin" Value="2,2,0,0" />
+                <Setter Property="Visibility" Value="Collapsed" />
+            </Style>
+
+            <Style x:Key="PriceTextStyle" TargetType="TextBlock">
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="FontWeight" Value="Bold" />
+                <Setter Property="Foreground" Value="{StaticResource PriceBrush}" />
+            </Style>
+
+            <!-- ===== כרטיס (מסגרת מעוגלת עם רקע) ===== -->
+            <Style x:Key="CardStyle" TargetType="Border">
+                <Setter Property="Background" Value="{StaticResource CardBrush}" />
+                <Setter Property="BorderBrush" Value="{StaticResource CardBorderBrush}" />
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="CornerRadius" Value="10" />
+                <Setter Property="Padding" Value="20" />
+            </Style>
+
+            <!-- ===== כפתורים ===== -->
+            <Style x:Key="PrimaryButtonStyle" TargetType="Button" BasedOn="{StaticResource AccentButtonStyle}">
+                <Setter Property="Padding" Value="24,8" />
+                <Setter Property="FontSize" Value="15" />
+                <Setter Property="CornerRadius" Value="6" />
+                <Setter Property="Margin" Value="0,0,8,0" />
+                <Setter Property="MinWidth" Value="120" />
+            </Style>
+
+            <Style x:Key="SecondaryButtonStyle" TargetType="Button">
+                <Setter Property="Padding" Value="24,8" />
+                <Setter Property="FontSize" Value="15" />
+                <Setter Property="CornerRadius" Value="6" />
+                <Setter Property="Margin" Value="0,0,8,0" />
+                <Setter Property="MinWidth" Value="120" />
+            </Style>
+
+            <!-- ===== שדות טופס ===== -->
+            <Style x:Key="FormTextBoxStyle" TargetType="TextBox">
+                <Setter Property="Margin" Value="0,12,0,0" />
+            </Style>
+            <Style x:Key="FormPasswordBoxStyle" TargetType="PasswordBox">
+                <Setter Property="Margin" Value="0,12,0,0" />
+            </Style>
+            <Style x:Key="FormComboBoxStyle" TargetType="ComboBox">
+                <Setter Property="Margin" Value="0,12,0,0" />
+                <Setter Property="HorizontalAlignment" Value="Stretch" />
+            </Style>
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
